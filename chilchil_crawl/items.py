@@ -14,22 +14,10 @@ class ChilchilCrawlItem(scrapy.Item):
     title = scrapy.Field()
     # 著者
     author = scrapy.Field()
-    author_id = scrapy.Field()
-    # # 作画
-    # drawer = scrapy.Field()
-    # drawer_id = scrapy.Field()
-    # # 原作
-    # writer = scrapy.Field()
-    # writer_id = scrapy.Field()
-    # # 媒体
-    # category = scrapy.Field()
-    # category_id = scrapy.Field()
     # 出版社
     publisher = scrapy.Field()
-    publisher_id = scrapy.Field()
     # レーベル
     label = scrapy.Field()
-    label_id = scrapy.Field()
     # 発売日
     sales_date = scrapy.Field()
     # 価格
@@ -42,7 +30,7 @@ class ChilchilCrawlItem(scrapy.Item):
     # erodo
     erodo = scrapy.Field()
     # play
-    #play = scrapy.Field()
+    play = scrapy.Field()
     # settei
     settei = scrapy.Field()
     # tone
