@@ -14,6 +14,10 @@ class ChilchilCrawlItem(scrapy.Item):
     title = scrapy.Field()
     # 著者
     author = scrapy.Field()
+    # 原作
+    writer = scrapy.Field()
+    # 作画
+    drawer = scrapy.Field()
     # 出版社
     publisher = scrapy.Field()
     # レーベル
@@ -35,3 +39,14 @@ class ChilchilCrawlItem(scrapy.Item):
     settei = scrapy.Field()
     # tone
     tone = scrapy.Field()
+    # review_count
+    review_count = scrapy.Field()
+    # vote_count
+    vote_count = scrapy.Field()
+    # percent of 5 votes
+    kami_percent = scrapy.Field()
+    # score calculated by chilchil
+    score = scrapy.Field()
+    average_vote = scrapy.Field()
+    vote_items_count = scrapy.Field()
+    

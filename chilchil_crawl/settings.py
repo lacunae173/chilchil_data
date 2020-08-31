@@ -66,6 +66,8 @@ DOWNLOAD_DELAY = 5
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'chilchil_crawl.pipelines.ChilchilCrawlPipeline': 300,
+   # 'chilchil_crawl.pipelines.UpdateAuthorFieldPipeline': 300,
+   # 'chilchil_crawl.pipelines.ChilUpdatePipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -88,5 +90,6 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-MONGO_URI = 'mongodb+srv://chiluser:chilchilbl@cluster0.bh9pd.mongodb.net/test'
-MONGO_DATABASE = 'chilchil'
+MONGO_URI = "###"
+MONGO_DATABASE = "###"
+MONGO_COLLECTION = "###"

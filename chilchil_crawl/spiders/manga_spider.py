@@ -3,10 +3,11 @@ from scrapy.http import FormRequest, Request
 from ..items import ChilchilCrawlItem
 
 class MangaSpider(scrapy.Spider):
+
     name = "mangas"
-    # start_urls = [
-    #     'https://www.chil-chil.net/goodsList/offset/0/',
-    # ]
+    # Start and end points of mangas to crawl, there are 50 works in one page
+    start_offset = 0;
+    end_offset = 50;
 
     start_urls = [
         'https://www.chil-chil.net/login/',
@@ -27,9 +28,8 @@ class MangaSpider(scrapy.Spider):
         }, callback=self.after_login)
 
     def after_login(self, response):
-        for i in range(1000, 2000, 50):
+        for i in range(self.start_offset, self.end_offset, 50):
             yield Request(f"https://www.chil-chil.net/goodsList/offset/{i}/", callback=self.parse_page)
-
 
     def parse_page(self, response):
         for book in response.css('div.c-list'):
@@ -59,6 +59,13 @@ class MangaSpider(scrapy.Spider):
         if '著者' in field_dict:
             author_field = field_dict['著者']
             item['author'] = author_field.css('a::text').get() 
+        else: # sometimes instead of a single author, there is a plot writer and a drawer
+            if '原作' in field_dict:
+                writer_field = field_dict['原作']
+                item['writer'] = writer_field.css('a::text').get() 
+            if '作画' in field_dict:
+                drawer_field = field_dict['作画']
+                item['drawer'] = drawer_field.css('a::text').get()
         if '出版社' in field_dict:
             publisher_field = field_dict['出版社']
             item['publisher']= publisher_field.css('a::text').get() 
@@ -79,5 +86,10 @@ class MangaSpider(scrapy.Spider):
         item['play'] = list(set(response.css('div.c-story_tag').css('dl')[1].css('dd').css('a::text').getall()))
         item['settei'] = list(set(response.css('div.c-story_tag').css('dl')[2].css('dd').css('a::text').getall()))
         item['tone'] = list(set(response.css('div.c-story_tag').css('dl')[3].css('dd').css('a::text').getall()))
-
+        item['review_count'] = response.css('dl.c-rating01_data01 dd::text').get()
+        item['score'] = response.css('dl.c-rating01_data02 dd::text').get()
+        item['vote_count'] = response.css('dl.c-rating01_data03 dd::text').get()
+        item['average_vote'] = response.css('span[itemprop="ratingValue"]::text').get()
+        item['kami_percent'] = response.css('dl.c-rating01_data05 dd::text').get()[:-1]
+        item['vote_items_count'] = response.css('div.c-rank01 li::text').getall()
         yield item
