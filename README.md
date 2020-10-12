@@ -14,7 +14,7 @@ MONGO_URI = "###"
 MONGO_DATABASE = "###"
 MONGO_COLLECTION = "###"
 ```
-Number of items to be crawled can be specified in `spiders\manga_spider.py`  
+Number of items to be crawled can be specified in `spiders/manga_spider.py`  
 ```
 # Start and end points of mangas to crawl, there are 50 works in one page
 start_offset = 0;
